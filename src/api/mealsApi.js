@@ -1,9 +1,51 @@
 import axiosClient from './axiosClient'
 
-export const fetchCategories = () => axiosClient.get('/categories.php ')
+const handleApiError = (error) => {
+	if (error.response) {
+		throw new Error(
+			error.response.data.message || 'Server responded with an error.'
+		)
+	} else if (error.request) {
+		throw new Error(
+			'No response from the server. Please check your network connection.'
+		)
+	} else {
+		throw new Error('Something went wrong during the request.')
+	}
+}
 
-export const fetchMealsInCategory = (categoryName) =>
-	axiosClient.get(`/filter.php?c=${categoryName}`)
+export const fetchCategories = async () => {
+	try {
+		const response = axiosClient.get('/categories.php ')
+		return response.data
+	} catch (error) {
+		handleApiError(error)
+	}
+}
 
-export const fetchMealDetails = (mealId) =>
-	axiosClient.get(`/lookup.php?i=${mealId}`)
+export const fetchMealsInCategory = async (categoryName) => {
+	try {
+		const response = await axiosClient.get(`/filter.php?c=${categoryName}`)
+		return response
+	} catch (error) {
+		handleApiError(error)
+	}
+}
+
+export const fetchMealDetails = async (mealId) => {
+	try {
+		const response = await axiosClient.get(`/lookup.php?i=${mealId}`)
+		return response
+	} catch (error) {
+		handleApiError(error)
+	}
+}
+
+export const fetchMealByName = async (query) => {
+	try {
+		const response = await axiosClient.get(`/search.php?s=${query}`)
+		return response
+	} catch (error) {
+		handleApiError(error)
+	}
+}
