@@ -8,6 +8,7 @@ import {
 import { useEffect, useMemo, useRef, useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import { fetchMealDetails } from '../api/mealsApi'
+import Loader from '../components/Loader/Loader'
 
 function TextWithLineBreaks({ text }) {
 	const htmlString = text
@@ -26,6 +27,8 @@ function TextWithLineBreaks({ text }) {
 const MealView = () => {
 	const { id } = useParams()
 	const navigate = useNavigate()
+
+	const [isFetchingMealDetails, setIsFetchingMealDetails] = useState(false)
 	const [meal, setMeal] = useState(null)
 	const videoFrame = useRef(null)
 
@@ -36,12 +39,18 @@ const MealView = () => {
 
 	useEffect(() => {
 		async function handleFetchMealDetails() {
-			const response = await fetchMealDetails(id)
+			setIsFetchingMealDetails(true)
 
-			const fetchedMeal = response?.meals?.[0] ?? null
-			setMeal(fetchedMeal)
-			formatIngredients(fetchedMeal)
-			formatVideoUrl(fetchedMeal)
+			try {
+				const response = await fetchMealDetails(id)
+
+				const fetchedMeal = response?.meals?.[0] ?? null
+				setMeal(fetchedMeal)
+				formatIngredients(fetchedMeal)
+				formatVideoUrl(fetchedMeal)
+			} finally {
+				setIsFetchingMealDetails(false)
+			}
 		}
 
 		handleFetchMealDetails()
@@ -76,13 +85,19 @@ const MealView = () => {
 		return ingredientsArray
 	}
 
-	if (!meal) return <div></div>
+	if (meal === null || isFetchingMealDetails) {
+		return (
+			<div className="flex-1 flex justify-center items-center">
+				<Loader />
+			</div>
+		)
+	}
 
 	return (
 		<div className="text-[#232323] px-6 sm:px-12 pt-6 pb-4">
 			<header className="pl-1 mb-4">
 				<button
-					onClick={() => navigate('/meals')}
+					onClick={() => navigate(-1)}
 					type="button"
 					className="group text-[#232323] cursor-pointer "
 				>
@@ -175,7 +190,7 @@ const MealView = () => {
 							Instructions
 						</h4>
 						<div className="w-full sm:w-1/2">
-							<TextWithLineBreaks text={meal.strInstructions} />
+							<TextWithLineBreaks text={meal?.strInstructions} />
 						</div>
 					</div>
 
@@ -190,9 +205,9 @@ const MealView = () => {
 									className="absolute top-0 left-0 w-full h-full"
 									id="videoFrame"
 									title="YouTube video player"
-									frameborder="0"
+									frameBorder="10"
 									allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-									allowfullscreen
+									allowFullScreen
 								></iframe>
 							</div>
 						</div>

@@ -1,0 +1,37 @@
+.loading-dots {
+	--dot-size: 10px;
+	--dot-gap: 8px;
+	--dot-speed: 900ms;
+	--dot-color: #e5e7eb;
+	--dot-accent: #ff6b6b;
+
+	display: inline-flex;
+	align-items: center;
+	gap: var(--dot-gap);
+}
+
+.loading-dots > span {
+	width: var(--dot-size);
+	height: var(--dot-size);
+	border-radius: 50%;
+	background: var(--dot-color);
+	animation: dot-swap var(--dot-speed) linear infinite;
+}
+
+.loading-dots > span:nth-child(2) {
+	animation-delay: calc(var(--dot-speed) / 3);
+}
+.loading-dots > span:nth-child(3) {
+	animation-delay: calc(2 * var(--dot-speed) / 3);
+}
+
+/* Color-only animation — no movement */
+@keyframes dot-swap {
+	0%,
+	100% {
+		background: var(--dot-color);
+	}
+	50% {
+		background: var(--dot-accent);
+	}
+}
