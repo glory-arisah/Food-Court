@@ -23,7 +23,7 @@ const Footer = () => {
 					</div>
 
 					<div>
-						<div class="flex items-center gap-2 text-sm">
+						<div className="flex items-center gap-2 text-sm">
 							<svg
 								xmlns="http://www.w3.org/2000/svg"
 								xmlns:xlink="http://www.w3.org/1999/xlink"

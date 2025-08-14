@@ -16,17 +16,17 @@ const handleApiError = (error) => {
 
 export const fetchCategories = async () => {
 	try {
-		const response = axiosClient.get('/categories.php ')
+		const response = await axiosClient.get('/categories.php ')
 		return response.data
 	} catch (error) {
 		handleApiError(error)
 	}
 }
 
-export const fetchMealsInCategory = async (categoryName) => {
+export const fetchMealsByCategory = async (categoryName) => {
 	try {
 		const response = await axiosClient.get(`/filter.php?c=${categoryName}`)
-		return response
+		return response.data
 	} catch (error) {
 		handleApiError(error)
 	}
@@ -35,7 +35,7 @@ export const fetchMealsInCategory = async (categoryName) => {
 export const fetchMealDetails = async (mealId) => {
 	try {
 		const response = await axiosClient.get(`/lookup.php?i=${mealId}`)
-		return response
+		return response.data
 	} catch (error) {
 		handleApiError(error)
 	}
@@ -44,7 +44,7 @@ export const fetchMealDetails = async (mealId) => {
 export const fetchMealByName = async (query) => {
 	try {
 		const response = await axiosClient.get(`/search.php?s=${query}`)
-		return response
+		return response.data
 	} catch (error) {
 		handleApiError(error)
 	}

@@ -6,7 +6,7 @@ import Footer from './components/layout/Footer'
 function App() {
 	return (
 		<BrowserRouter>
-			<div className="bg-[#0a0a0a] text-white min-h-screen flex flex-col">
+			<div className="min-h-screen flex flex-col">
 				<Header />
 				<main className="flex-1 mt-10">
 					<AppRoutes />
