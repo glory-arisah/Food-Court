@@ -1,0 +1,17 @@
+.header--wrapper::before {
+	position: absolute;
+	content: '';
+	background-image: url('https://media.istockphoto.com/id/1829241109/photo/enjoying-a-brunch-together.jpg?s=612x612&w=0&k=20&c=9awLLRMBLeiYsrXrkgzkoscVU_3RoVwl_HA-OT-srjQ=');
+	opacity: 0.5;
+	background-size: cover;
+	background-position: center;
+	z-index: 0;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+}
+
+.categories::-webkit-scrollbar {
+	display: none;
+}

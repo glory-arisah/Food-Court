@@ -8,7 +8,7 @@ function App() {
 		<BrowserRouter>
 			<div className="bg-[#0a0a0a] text-white min-h-screen flex flex-col">
 				<Header />
-				<main className="flex-1 mt-10 py-8 px-4 sm:px-8">
+				<main className="flex-1 mt-10">
 					<AppRoutes />
 				</main>
 				<Footer />
