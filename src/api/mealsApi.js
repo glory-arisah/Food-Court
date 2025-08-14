@@ -40,12 +40,3 @@ export const fetchMealDetails = async (mealId) => {
 		handleApiError(error)
 	}
 }
-
-export const fetchMealByName = async (query) => {
-	try {
-		const response = await axiosClient.get(`/search.php?s=${query}`)
-		return response.data
-	} catch (error) {
-		handleApiError(error)
-	}
-}
