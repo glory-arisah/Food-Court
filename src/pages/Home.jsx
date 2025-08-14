@@ -1,12 +1,12 @@
 import { Check, ChevronDown, Search, SlidersHorizontal, X } from 'lucide-react'
 import { useEffect, useMemo, useRef, useState } from 'react'
-import '../assets/Home.css'
-import { fetchCategories, fetchMealsByCategory } from '../api/mealsApi'
-import MealCard from '../components/MealCard'
-import Loader from '../components/Loader/Loader'
+import '@/assets/Home.css'
+import { fetchCategories, fetchMealsByCategory } from '@/api/mealsApi'
+import MealCard from '@components/MealCard'
+import Loader from '@components/Loader/Loader'
 import { toast } from 'react-toastify'
-import Modal from '../components/Modal'
-import useClickOutside from '../hooks/useClickOutside'
+import Modal from '@components/Modal'
+import useClickOutside from '@/hooks/useClickOutside'
 
 const sortOrders = [
 	{ key: 'ASC', label: 'Name (A-Z)' },
@@ -154,7 +154,7 @@ const Home = () => {
 						/>
 
 						<input
-							className="outline-none text-sm bg-white text-[#232323] placeholder:text-[#232323]/50 border border-[#3B5162] py-4 sm:py-6 px-12 w-full rounded-xl"
+							className="outline-none text-sm bg-white text-primary-dark placeholder:text-primary-dark/50 border border-[#3B5162] py-4 sm:py-6 px-12 w-full rounded-xl"
 							value={searchQuery}
 							placeholder="Search Recipe..."
 							onChange={(e) => setSearchQuery(e.target.value)}
@@ -163,7 +163,7 @@ const Home = () => {
 						<button
 							type="button"
 							onClick={() => setSearchQuery('')}
-							className={`absolute right-6 origin-bottom-right p-1 transition-colors top-1/2 -translate-y-1/2 transition-opacity duration-200 hover:bg-[#f1f1f1] rounded-full cursor-pointer ${
+							className={`absolute right-6 origin-bottom-right p-1 transition-colors top-1/2 -translate-y-1/2 transition-opacity duration-200 hover:bg-gray rounded-full cursor-pointer ${
 								searchQuery.trim().length > 0
 									? 'visible opacity-100'
 									: 'invisible opacity-0'
@@ -178,7 +178,7 @@ const Home = () => {
 				</div>
 			</section>
 			<section className="bg-white py-8 px-6">
-				<div className="categories text-[#232323] relative flex gap-x-8 mb-8 whitespace-nowrap overflow-x-auto overflow-y-hidden font-semibold text-sm border-b-[0.5px] pb-2 border-[#ABBBC2] scrollbar">
+				<div className="categories text-primary-dark relative flex gap-x-8 mb-8 whitespace-nowrap overflow-x-auto overflow-y-hidden font-semibold text-sm border-b-[0.5px] pb-2 border-[#ABBBC2] scrollbar">
 					{categories.map((category, index) => (
 						<button
 							key={index}
@@ -186,9 +186,9 @@ const Home = () => {
 							onClick={() => handleSelectCategory(category)}
 							className={`${
 								isActiveCategory(category?.idCategory)
-									? 'text-[#EA7C69] after:absolute after:content-[""] after:left-0 after:-bottom-2.5 after:border-3 after:border-[#EA7C69] after:rounded-full after:w-full '
+									? 'text-primary after:absolute after:content-[""] after:left-0 after:-bottom-2.5 after:border-3 after:border-primatext-primary after:rounded-full after:w-full '
 									: ''
-							}	cursor-pointer relative transition-colors duration-300 hover:text-[#EA7C69]`}
+							}	cursor-pointer relative transition-colors duration-300 hover:text-primary`}
 						>
 							<span>{category?.strCategory ?? 'N/A'}</span>
 						</button>
@@ -201,7 +201,7 @@ const Home = () => {
 					</div>
 				) : (
 					<>
-						<div className="flex justify-between items-center text-[#232323] font-semibold mb-8">
+						<div className="flex justify-between items-center text-primary-dark font-semibold mb-8">
 							<h4>
 								Found{' '}
 								<span className="text-[#4094F7]">
@@ -213,7 +213,7 @@ const Home = () => {
 							<button
 								type="button"
 								onClick={() => setIsModalOpen(true)}
-								className="inline sm:hidden p-1 cursor-pointer border border-[#232323] rounded-lg"
+								className="inline sm:hidden p-1 cursor-pointer border border-primary-dark rounded-lg"
 							>
 								<SlidersHorizontal size={16} />
 							</button>
@@ -222,7 +222,7 @@ const Home = () => {
 								ref={dropdownTriggerRef}
 								role="button"
 								onClick={toggleSortDropdown}
-								className="hidden sm:flex items-center relative p-1 pl-3 border border-[#DDE2E4] rounded-md text-sm cursor-pointer"
+								className="hidden sm:flex items-center relative p-1 pl-3 shadow rounded-md text-sm cursor-pointer"
 							>
 								<span className="inline-block mr-2 text-[#787878]">
 									Sort by
@@ -245,14 +245,14 @@ const Home = () => {
 									{sortOrders.map((order) => (
 										<div
 											key={order.key}
-											className={`flex items-center justify-between hover:bg-[#FF7F11]/30 ${
-												sortOrder === order.key ? 'bg-[#FF7F11]/30' : ''
+											className={`flex items-center justify-between px-1 hover:bg-primary/30 rounded-md ${
+												sortOrder === order.key ? 'bg-primary/30' : ''
 											}`}
 										>
 											<button
 												type="button"
 												onClick={() => setSortOrder(order.key)}
-												className={`text-left w-full p-1  cursor-pointer										
+												className={`text-left w-full p-1 cursor-pointer										
 									`}
 											>
 												{order.label}
@@ -261,7 +261,7 @@ const Home = () => {
 											{sortOrder === order.key && (
 												<Check
 													size={18}
-													color="#FF7F11"
+													color="#d45a3c"
 												/>
 											)}
 										</div>
@@ -279,7 +279,7 @@ const Home = () => {
 									<h3 className="text-lg font-semibold">Sort by Name</h3>
 									<button
 										onClick={() => setIsModalOpen(false)}
-										className="hover:bg-[#f1f1f1] rounded-full p-1"
+										className="hover:bg-gray rounded-full p-1"
 									>
 										<X
 											size={20}
@@ -287,11 +287,11 @@ const Home = () => {
 										/>
 									</button>
 								</div>
-								<div className="pt-4 space-y-2 text-[#232323] text-sm">
+								<div className="pt-4 space-y-2 text-primary-dark text-sm">
 									{sortOrders.map((order) => (
 										<div
 											key={order.key}
-											className={`flex items-center justify-between rounded px-2 hover:bg-[#FF7F11]/30`}
+											className={`flex items-center justify-between rounded px-2 hover:bg-primary/30`}
 										>
 											<button
 												type="button"
@@ -314,7 +314,7 @@ const Home = () => {
 								<div className="pt-4">
 									<button
 										onClick={applySortOrder}
-										className="w-full px-4 py-2.5 text-white cursor-pointer font-bold rounded-xl bg-[#FF7F11] hover:bg-[#FF7F11]/80 transition-colors duration-200"
+										className="w-full px-4 py-2.5 text-white cursor-pointer font-bold rounded-xl bg-primary hover:bg-primary/80 transition-colors duration-200"
 									>
 										Apply
 									</button>
@@ -322,7 +322,7 @@ const Home = () => {
 							</div>
 						</Modal>
 
-						<div className="meals-grid grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6 text-[#232323]">
+						<div className="meals-grid grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6 text-primary-dark">
 							{filteredMeals.map((meal, mealIdx) => (
 								<MealCard
 									key={meal.idMeal || mealIdx}

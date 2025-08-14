@@ -4,8 +4,8 @@ const Footer = () => {
 	const currentDate = new Date()
 
 	return (
-		<section>
-			<div className="px-4 sm:px-8 py-4 bg-[#1F1D3F] w-full">
+		<section className="text-primary-dark">
+			<div className="px-4 sm:px-8 py-4 border-t-2 border-t-[#E5E9EB] w-full">
 				<div className="flex justify-between">
 					<div className="socail-media--links flex gap-2">
 						<Facebook
@@ -26,7 +26,7 @@ const Footer = () => {
 						<div className="flex items-center gap-2 text-sm">
 							<svg
 								xmlns="http://www.w3.org/2000/svg"
-								xmlns:xlink="http://www.w3.org/1999/xlink"
+								xmlnsXlink="http://www.w3.org/1999/xlink"
 								aria-hidden="true"
 								role="img"
 								width="1em"

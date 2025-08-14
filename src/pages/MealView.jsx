@@ -8,7 +8,7 @@ import {
 import { useEffect, useMemo, useRef, useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import { fetchMealDetails } from '../api/mealsApi'
-import Loader from '../components/Loader/Loader'
+import Loader from '@components/Loader/Loader'
 
 function TextWithLineBreaks({ text }) {
 	const htmlString = text
@@ -94,14 +94,14 @@ const MealView = () => {
 	}
 
 	return (
-		<div className="text-[#232323] px-6 sm:px-12 pt-6 pb-4">
+		<div className="text-primary-dark px-6 sm:px-12 pt-6 pb-4">
 			<header className="pl-1 mb-4">
 				<button
 					onClick={() => navigate(-1)}
 					type="button"
-					className="group text-[#232323] cursor-pointer "
+					className="group text-primary-dark cursor-pointer "
 				>
-					<div className="flex sm:hidden hover:bg-[#F1F1F1] rounded-full p-1">
+					<div className="flex sm:hidden hover:bg-gray rounded-full p-1">
 						<ChevronLeft size={20} />
 					</div>
 					<div className="hidden sm:flex items-center gap-1">
@@ -118,7 +118,7 @@ const MealView = () => {
 				<span>{meal?.strMeal}</span>
 			</h4>
 
-			<div className="flex items-center justify-center mb-6 text-xs font-semibold gap-4">
+			<div className="flex items-center justify-center mb-6 text-sm font-semibold gap-4">
 				<p className="flex items-center gap-2">
 					<MapPin size={16} /> {meal?.strArea}
 				</p>
@@ -162,7 +162,7 @@ const MealView = () => {
 					<div className="ingredients mt-0 py-6 px-4 bg-[#FFFBF2] border border-[#262522]/24 rounded-lg shadow-md">
 						<h5 className="mb-4">
 							<div>
-								<span className="font-semibold text-lg sm:text-xl uppercase text-[#EE6352]">
+								<span className="font-semibold text-lg sm:text-xl uppercase text-primary">
 									Ingredients
 								</span>{' '}
 								<span className="text-sm text-[#A9A9A9]">
@@ -186,7 +186,7 @@ const MealView = () => {
 					</div>
 
 					<div className="sm:col-span-2">
-						<h4 className="mb-2 font-semibold text-lg sm:text-3xl uppercase text-[#333333]">
+						<h4 className="mb-2 font-semibold text-lg sm:text-3xl uppercase text-secondary-dark">
 							Instructions
 						</h4>
 						<div className="w-full sm:w-1/2">
@@ -196,7 +196,7 @@ const MealView = () => {
 
 					{meal?.strYoutube && (
 						<div>
-							<h4 className="mb-2 font-semibold text-lg uppercase text-[#333333]">
+							<h4 className="mb-2 font-semibold text-lg uppercase text-secondary-dark">
 								Watch Tutorial
 							</h4>
 							<div className="relative max-w-full h-[250px] sm:w-full overflow-hidden">
