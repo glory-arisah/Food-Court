@@ -7,9 +7,9 @@ const MealCard = ({ meal }) => {
 	return (
 		<Link
 			to={mealRoute}
-			className="flex flex-row sm:flex-col items-center rounded overflow-hidden border border-[#E5E9EB]"
+			className="group flex flex-row sm:flex-col items-center rounded overflow-hidden border border-[#E5E9EB]"
 		>
-			<div className="group flex-1 sm:flex-[0.7] w-full overflow-clip">
+			<div className="flex-1 sm:flex-[0.7] w-full overflow-clip">
 				<div className="h-full w-full flex justify-center items-center transform group-hover:scale-110 transition duration-200">
 					{meal.strMealThumb ? (
 						<img
