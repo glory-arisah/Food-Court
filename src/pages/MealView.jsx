@@ -47,7 +47,6 @@ const MealView = () => {
 				const fetchedMeal = response?.meals?.[0] ?? null
 				setMeal(fetchedMeal)
 				formatIngredients(fetchedMeal)
-				formatVideoUrl(fetchedMeal)
 			} finally {
 				setIsFetchingMealDetails(false)
 			}
@@ -55,6 +54,12 @@ const MealView = () => {
 
 		handleFetchMealDetails()
 	}, [id])
+
+	useEffect(() => {
+		if (meal) {
+			formatVideoUrl(meal)
+		}
+	}, [meal])
 
 	function formatVideoUrl(meal) {
 		const videoUrl = meal?.strYoutube

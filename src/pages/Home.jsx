@@ -7,6 +7,7 @@ import Loader from '@components/Loader/Loader'
 import { toast } from 'react-toastify'
 import Modal from '@components/Modal'
 import useClickOutside from '@/hooks/useClickOutside'
+import NoRecipeResult from '../components/NoRecipeResult'
 
 const sortOrders = [
 	{ key: 'ASC', label: 'Name (A-Z)' },
@@ -82,11 +83,21 @@ const Home = () => {
 	}
 
 	// FILTER MEALS BY SEARCH QUERY
-	const filteredMeals = useMemo(() => {
-		return meals.filter((meal) =>
-			meal.strMeal.toLowerCase().includes(searchQuery.toLowerCase())
-		)
-	}, [searchQuery, meals])
+	const filteredMeals = useMemo(
+		() =>
+			meals.filter((meal) =>
+				meal.strMeal.toLowerCase().includes(searchQuery.toLowerCase())
+			),
+		[searchQuery, meals]
+	)
+
+	const showNoResults = useMemo(
+		() =>
+			searchQuery.trim().length > 0 &&
+			meals.length > 0 &&
+			filteredMeals.length === 0,
+		[filteredMeals, searchQuery]
+	)
 
 	// FETCH MEALS BY CATEGORY
 	useEffect(() => {
@@ -199,12 +210,17 @@ const Home = () => {
 					<div className="flex w-full justify-center items-center py-20">
 						<Loader />
 					</div>
+				) : showNoResults ? (
+					<NoRecipeResult
+						searchQuery={searchQuery}
+						onClearSearch={() => setSearchQuery('')}
+					/>
 				) : (
 					<>
 						<div className="flex justify-between items-center text-primary-dark font-semibold mb-8">
 							<h4>
 								Found{' '}
-								<span className="text-[#4094F7]">
+								<span className="text-primary">
 									{filteredMeals.length}{' '}
 									{filteredMeals.length === 1 ? 'result' : 'results'}
 								</span>
